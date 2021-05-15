@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from '../AppComponents/SearchBar';
-import SwitchButton from '../AppComponents/SwitchButton'
+import SwitchButton from '../AppComponents/SwitchButton';
+import SearchHistory from '../AppComponents/SearchHistory';
 
 import './homepage.css';
 
@@ -12,6 +13,9 @@ const HomePage = () => {
             </div>
             <div className="switch-div">
                 <SwitchButton/>
+            </div>
+            <div className="searchHistory-div">
+                <SearchHistory/>
             </div>
         </div>
     )

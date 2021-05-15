@@ -3,15 +3,14 @@
     flex-direction: column;
     text-align: center;
     height:100vh;
-    width:100vw;
-    max-width: 80rem;
+    width:90vw;
   }
   
   .search-div{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30vh;
+    height: 20vh;
   
   }
 
@@ -20,6 +19,15 @@
     justify-content: flex-start;
     align-items: center;
     height: 5vh;
-    margin-left: 10px;
+    margin-left: 20px;
   }
   
+  .searchHistory-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 63vh;
+    width: 85vw;
+    margin: 20px;
+    /* border: 2px solid #B6B5B5; */
+  }
