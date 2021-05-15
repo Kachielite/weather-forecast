@@ -1,7 +1,6 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -15,29 +14,20 @@ import Paper from '@material-ui/core/Paper';
 
 
 const useStyles = makeStyles((theme) => ({
-  container:{
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '63vh',
-    width: '85vw',
-    margin: '20px',
 
-  },
   icon: {
     marginRight: theme.spacing(2),
   },
   cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
   },
   card: {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-  },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
+    margin: '5px',
+    textAlign:'left'
   },
   cardContent: {
     flexGrow: 1,
@@ -50,7 +40,44 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchHistory() {
   const classes = useStyles();
 
-  const searchHistory = []
+  const searchHistory = [
+    {
+      cityName: 'Paris',
+      checkedOn: '24-05-2021'
+    },
+    {
+      cityName: 'Lagos',
+      checkedOn: '12-05-2021'
+    },
+    {
+      cityName: 'Tokyo',
+      checkedOn: '04-05-2021'
+    },
+    {
+      cityName: 'Nairobi',
+      checkedOn: '18-05-2021'
+    },
+    {
+      cityName: 'Berlin',
+      checkedOn: '02-05-2021'
+    },
+    {
+      cityName: 'London',
+      checkedOn: '03-05-2021'
+    },
+    {
+      cityName: 'New York',
+      checkedOn: '13-05-2021'
+    },
+    {
+      cityName: 'Yaounde',
+      checkedOn: '24-05-2021'
+    },
+    {
+      cityName: 'Lisbon',
+      checkedOn: '14-05-2021'
+    },
+  ]
  
 
   return (
@@ -58,22 +85,18 @@ export default function SearchHistory() {
       <CssBaseline />
       <main>
         <Paper className={classes.container}>
-        <Container className={classes.cardGrid} maxWidth="md">
-          <Grid container spacing={4}>
+        <Container className={classes.cardGrid} >
+          <Grid container spacing={5}>
             {searchHistory.map((card) => {
               return(
               <Grid item key={card.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    title={card.title}
-                  />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                        {card.title}
+                        {card.cityName}
                     </Typography>
                     <Typography>
-                        {card.overview.slice(0,200)}...                    
+                        Checked on: {card.checkedOn}                   
                     </Typography>
                   </CardContent>
                 </Card>
