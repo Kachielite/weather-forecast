@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    width:'100vw'
   },
   menuButton: {
     marginRight: theme.spacing(2),
