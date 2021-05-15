@@ -6,12 +6,15 @@ import HistoryIcon from '@material-ui/icons/History';
 class SwitchButton extends Component {
     constructor() {
       super();
-      this.state = { checked: false };
+      this.state = { checked: true };
       this.handleChange = this.handleChange.bind(this);
     }
+
+
   
     handleChange(checked) {
       this.setState({ checked });
+      this.props.searchHistoryHandler()
     }
   
     render() {
