@@ -97,21 +97,21 @@ export default function SearchHistory() {
             {searchHistory.map((card) => {
               return(
               <Grid item key={card.id} xs={12} sm={6} md={4}>
+                <CardActionArea>
                 <Card className={classes.card}>
-                  <CardActionArea>
                   <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="h7" component="h2">
                         {card.cityName}
                     </Typography>
                     <Typography>
                         Checked on: {card.checkedOn}                   
                     </Typography>
-                    <Button href="#text-buttons" color="primary" className={classes.button}>
+                    <div className={classes.button}>
                       <MoreVertIcon/>
-                    </Button>
+                    </div>
                   </CardContent>
-                  </CardActionArea>
                 </Card>
+                </CardActionArea>
               </Grid>)
               })}
           </Grid>
