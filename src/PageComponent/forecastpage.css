@@ -1,11 +1,11 @@
 h1{
-    font-size: 5rem;
-    padding: 3px;
+    font-size: 3rem;
+    padding: 1px;
 }
 
 h3{
-    font-weight: lighter;
-    padding: 8px;
+    
+    padding: 2px;
 }
 
 .forecast-div {
@@ -13,7 +13,7 @@ h3{
     display: flex;
     flex-direction: column;
     text-align: center;
-    width:95vw;
+    width:90vw;
     height:100vh
   }
 
@@ -22,7 +22,7 @@ h3{
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    height:30vh;
+    height:18vh;
     text-align: left;
     
 }
@@ -40,10 +40,23 @@ h3{
 
 .display-div{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-end;
-    flex-direction: column;
-    margin-top:30px;
-    width: 95vw;
-    height: 100%;
+    flex-direction: row;
+    margin:10px auto;
+    width: 100%;
+}
+
+.visual-div{
+    margin: 3px auto;
+    border: 2px solid black;
+    height: 30vh;
+    width: 100%;
+    background-color: white;
+}
+
+.link{
+    width: 10%;
+    margin: 30px auto;
+    background-color: white;
 }

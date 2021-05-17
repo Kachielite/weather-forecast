@@ -65,30 +65,30 @@ export default function SearchHistory() {
       cityName: 'Tokyo',
       checkedOn: '04-05-2021'
     },
-    {
-      cityName: 'Nairobi',
-      checkedOn: '18-05-2021'
-    },
-    {
-      cityName: 'Berlin',
-      checkedOn: '02-05-2021'
-    },
-    {
-      cityName: 'London',
-      checkedOn: '03-05-2021'
-    },
-    {
-      cityName: 'New York',
-      checkedOn: '13-05-2021'
-    },
-    {
-      cityName: 'Yaounde',
-      checkedOn: '24-05-2021'
-    },
-    {
-      cityName: 'Lisbon',
-      checkedOn: '14-05-2021'
-    },
+    // {
+    //   cityName: 'Nairobi',
+    //   checkedOn: '18-05-2021'
+    // },
+    // {
+    //   cityName: 'Berlin',
+    //   checkedOn: '02-05-2021'
+    // },
+    // {
+    //   cityName: 'London',
+    //   checkedOn: '03-05-2021'
+    // },
+    // {
+    //   cityName: 'New York',
+    //   checkedOn: '13-05-2021'
+    // },
+    // {
+    //   cityName: 'Yaounde',
+    //   checkedOn: '24-05-2021'
+    // },
+    // {
+    //   cityName: 'Lisbon',
+    //   checkedOn: '14-05-2021'
+    // },
   ]
  
 
