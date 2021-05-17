@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -9,7 +10,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Button from '@material-ui/core/Button';
 
 
 
@@ -38,14 +38,18 @@ const useStyles = makeStyles((theme) => ({
   button:{
     display: 'flex',
     justifyContent:'flex-end'
+  },
+  link:{
+    textDecoration:'none'
   }
 }));
 
 
 
-
 export default function SearchHistory() {
   const classes = useStyles();
+
+
 
   const searchHistory = [
     {
@@ -98,19 +102,21 @@ export default function SearchHistory() {
               return(
               <Grid item key={card.id} xs={12} sm={6} md={4}>
                 <CardActionArea>
-                <Card className={classes.card}>
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h7" component="h2">
-                        {card.cityName}
-                    </Typography>
-                    <Typography>
-                        Checked on: {card.checkedOn}                   
-                    </Typography>
-                    <div className={classes.button}>
-                      <MoreVertIcon/>
-                    </div>
-                  </CardContent>
-                </Card>
+                  <Link to={`/forecast?city=${card.cityName.charAt(0).toLowerCase() + card.cityName.slice(1)}`} className={classes.link}>
+                    <Card className={classes.card}>
+                      <CardContent className={classes.cardContent}>
+                        <Typography gutterBottom variant="h7" component="h2">
+                            {card.cityName}
+                        </Typography>
+                        <Typography>
+                            Checked on: {card.checkedOn}                   
+                        </Typography>
+                        <div className={classes.button}>
+                          <MoreVertIcon/>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
                 </CardActionArea>
               </Grid>)
               })}
