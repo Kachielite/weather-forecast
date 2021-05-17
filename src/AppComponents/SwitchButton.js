@@ -25,14 +25,14 @@ class SwitchButton extends Component {
                 <Switch
                     checked={this.state.checked}
                     onChange={this.handleChange}
-                    handleDiameter={28}
+                    handleDiameter={38}
                     offColor="#B6B5B5"
                     onColor="#4FBC90"
                     offHandleColor="#fff"
                     onHandleColor="#fff"
-                    height={40}
-                    width={70}
-                    borderRadius={6}
+                    height={38}
+                    width={75}
+                    borderRadius={0}
                     activeBoxShadow="0px 0px 1px 2px #B6B5B5"
                     uncheckedIcon={
                     <div

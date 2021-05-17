@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
+
     margin: '5px',
     textAlign:'left'
   },
@@ -100,10 +101,10 @@ export default function SearchHistory() {
           <Grid container spacing={5}>
             {searchHistory.map((card) => {
               return(
-              <Grid item key={card.id} xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <CardActionArea>
-                  <Link to={`/forecast?city=${card.cityName.charAt(0).toLowerCase() + card.cityName.slice(1)}`} className={classes.link}>
-                    <Card className={classes.card}>
+                  <Link to={`/forecast/${card.cityName.charAt(0).toLowerCase() + card.cityName.slice(1)}`} className={classes.link}>
+                    <Card className={classes.card} >
                       <CardContent className={classes.cardContent}>
                         <Typography gutterBottom variant="h7" component="h2">
                             {card.cityName}

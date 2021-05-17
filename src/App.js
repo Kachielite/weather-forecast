@@ -13,7 +13,7 @@ function App() {
         <TitleBar/>
         <Switch>
           <Route exact path="/" component={HomePage}/>
-          <Route exact path="/forecast/:cityName" component={ForecastPage}/>
+          <Route  path="/forecast/:cityName" component={ForecastPage}/>
         </Switch>
       </div>
     </Router>

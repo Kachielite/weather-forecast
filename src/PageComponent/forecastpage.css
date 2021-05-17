@@ -1,0 +1,49 @@
+h1{
+    font-size: 5rem;
+    padding: 3px;
+}
+
+h3{
+    font-weight: lighter;
+    padding: 8px;
+}
+
+.forecast-div {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width:95vw;
+    height:100vh
+  }
+
+.weather-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    height:30vh;
+    text-align: left;
+    
+}
+
+.city-div{
+    text-align: left;
+    margin-right: 20px;
+}
+
+
+.weather-div{
+    margin-right: 25rem;
+    width: 100%;
+}
+
+.display-div{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-top:30px;
+    width: 95vw;
+    height: 100%;
+}
