@@ -16,6 +16,7 @@ const HomePage = () => {
             setSearchHistory(true)
         }
     }
+    
 
     return(
         <div className="home-div">

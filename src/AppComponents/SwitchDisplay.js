@@ -7,10 +7,8 @@ const SwitchDisplay = () =>{
 
     const options = [
         {
-            label: <span>Chart</span>,
-            value: {
-                 chart: true
-            },
+            label: "Chart",
+            value: "chart",
             selectedBackgroundColor: "#3F51B4",
         },
         {
