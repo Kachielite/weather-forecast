@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import SearchBar from '../AppComponents/SearchBar';
 import SwitchButton from '../AppComponents/SwitchButton';
 import SearchHistory from '../AppComponents/SearchHistory';
+import { useHistory } from "react-router-dom";
 
 import './homepage.css';
 
@@ -17,6 +18,9 @@ const HomePage = () => {
         }
     }
     
+    const history = useHistory();
+      
+      console.log(history)
 
     return(
         <div className="home-div">

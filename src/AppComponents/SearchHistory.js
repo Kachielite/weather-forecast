@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import {Link} from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -11,6 +11,8 @@ import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import {WeatherContext} from '../DataStore/WeatherContext';
+
 
 
 
@@ -18,19 +20,16 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme) => ({
 
-  icon: {
-    marginRight: theme.spacing(2),
-  },
   cardGrid: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
+    // paddingTop: theme.spacing(4),
+    // paddingBottom: theme.spacing(4),
+    width:'100%',
+    height:'100%'
   },
   card: {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-
-    margin: '5px',
     textAlign:'left'
   },
   cardContent: {
@@ -49,47 +48,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchHistory() {
   const classes = useStyles();
+  const {searched} = useContext(WeatherContext);
 
 
-
-  const searchHistory = [
-    {
-      cityName: 'Paris',
-      checkedOn: '24-05-2021'
-    },
-    {
-      cityName: 'Lagos',
-      checkedOn: '12-05-2021'
-    },
-    {
-      cityName: 'Tokyo',
-      checkedOn: '04-05-2021'
-    },
-    // {
-    //   cityName: 'Nairobi',
-    //   checkedOn: '18-05-2021'
-    // },
-    // {
-    //   cityName: 'Berlin',
-    //   checkedOn: '02-05-2021'
-    // },
-    // {
-    //   cityName: 'London',
-    //   checkedOn: '03-05-2021'
-    // },
-    // {
-    //   cityName: 'New York',
-    //   checkedOn: '13-05-2021'
-    // },
-    // {
-    //   cityName: 'Yaounde',
-    //   checkedOn: '24-05-2021'
-    // },
-    // {
-    //   cityName: 'Lisbon',
-    //   checkedOn: '14-05-2021'
-    // },
-  ]
  
 
   return (
@@ -98,8 +59,8 @@ export default function SearchHistory() {
       <main>
         <Paper className={classes.container}>
         <Container className={classes.cardGrid} >
-          <Grid container spacing={5}>
-            {searchHistory.map((card) => {
+          <Grid container spacing={3}>
+            {searched.slice(0,9).map((card) => {
               return(
               <Grid item xs={12} sm={6} md={4}>
                 <CardActionArea>
