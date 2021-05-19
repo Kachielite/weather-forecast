@@ -8,6 +8,8 @@ import {WeatherProvider} from './DataStore/WeatherContext';
 import './App.css';
 
 function App() {
+
+
   return (
     <WeatherProvider>
     <Router>

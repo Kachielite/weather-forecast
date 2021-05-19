@@ -2,6 +2,7 @@ import {createContext,useState} from 'react';
 import axios from 'axios';
 
 
+
 export const WeatherContext = createContext(); //create Weather Context
 
 export const WeatherProvider = (props) => {     //Create WeatherContext Provider
@@ -36,7 +37,9 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
         return dateTime
     }
 
-    const apiKey = "065faab4bf6c2518641eeb48bcc7bb2f"
+    const apiKey = `${process.env.REACT_APP_WEATHER_API_KEY}`
+
+    console.log(apiKey)
 
     //Convert CityName to Latitude and Longitude
     const getGeoLocation= async ()=>{
