@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {Switch, Route} from 'react-router-dom'
 import HomePage from './PageComponent/HomePage';
 import ForecastPage from './PageComponent/ForecastPage'
 import TitleBar from './AppComponents/TitleBar';
@@ -12,7 +12,6 @@ function App() {
 
   return (
     <WeatherProvider>
-    <Router>
       <div className="App">
         <TitleBar/>
         <Switch>
@@ -20,7 +19,6 @@ function App() {
           <Route  path="/forecast/:cityName" component={ForecastPage}/>
         </Switch>
       </div>
-    </Router>
     </WeatherProvider>
   );
 }

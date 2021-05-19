@@ -31,18 +31,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Search() {
+export default function Search(props) {
 
   const classes = useStyles();
 
   const {onSubmit, searchHandler} = useContext(WeatherContext)
 
-      
-
 
   return (
     <Paper component="form" className={classes.root} onSubmit={onSubmit}>
-        <IconButton type="submit" className={classes.iconButton} aria-label="search">
+        <IconButton type="submit" className={classes.iconButton} aria-label="search" >
             <SearchIcon />
         </IconButton>
         <Divider className={classes.divider} orientation="vertical" />
