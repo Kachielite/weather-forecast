@@ -1,4 +1,4 @@
-import {createContext,useState} from 'react';
+import {createContext,useEffect,useState} from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 
@@ -10,9 +10,10 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
 
 
     //Getting user request
-    const [userQuery, setUserQuery] = useState('');
+    const [userQuery, setUserQuery,] = useState('');
     const [searched, setSearched] = useState([])
     const [currentCondition, setCurrentCondition] = useState({})
+    const [loading, setLoading] = useState(false)
 
 
 
@@ -25,9 +26,7 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
       event.preventDefault()
       setSearched([{cityName:userQuery.charAt(0).toUpperCase() + userQuery.slice(1), checkedOn: getTime()},...searched])
       getGeoLocation()
-      
-    
-      
+      switchPage()
     }
 
     const history = useHistory();
@@ -65,12 +64,22 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
         return (`${(wind * (36/10)).toFixed(2)}Km/h`)
     }
 
-    const apiKey = `${process.env.REACT_APP_WEATHER_API_KEY}`
+    //History Tiles Action
 
-    console.log(currentCondition)
+    const cityHandler = (city) =>{
+        setUserQuery(city)
+        console.log(city, userQuery)
+        getGeoLocation()
+    }
+
+    useEffect(()=> {},[userQuery])
+
+
+    const apiKey = `${process.env.REACT_APP_WEATHER_API_KEY}`
 
     //Convert CityName to Latitude and Longitude
     const getGeoLocation= async ()=>{
+        setLoading(true)
 
         const url = `http://api.openweathermap.org/geo/1.0/direct?q=${userQuery}&appid=${apiKey}`;
         
@@ -84,20 +93,19 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
             console.log('Error message: ', error);
 
         } finally {
-            // switchPage()
+            
         }
     }
 
     // Get weather details
     const getWeatherDetails = async (lat, lon)=>{
-
-        console.log(lat, lon)
+        setLoading(true)
 
         const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}`;
         
         try {
         const res = await axios.get(url)
-        console.log(currentCondition)
+       
         setCurrentCondition({
             city:userQuery, 
             checkedOn: apiDate(res.data.current.dt), 
@@ -110,13 +118,15 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
             console.log('Error message: ', error);
 
         } finally {
-            switchPage()
+            setLoading(false)
+            
+            
         }
     }
 
 
     return(
-        <WeatherContext.Provider value={{searchHandler, onSubmit, searched, userQuery, currentCondition}}>
+        <WeatherContext.Provider value={{searchHandler, onSubmit, searched, userQuery, currentCondition, cityHandler, setUserQuery, loading}}>
             {props.children}
         </WeatherContext.Provider>
     )
