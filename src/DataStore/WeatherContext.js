@@ -13,12 +13,13 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
     const [userQuery, setUserQuery,] = useState('');
     const [searched, setSearched] = useState([])
     const [currentCondition, setCurrentCondition] = useState({})
+    const [dailyConditions, setDailyConditions] = useState([])
     const [loading, setLoading] = useState(false)
 
 
 
   
-    const searchHandler = (event) => {
+    const searchHandler = (event) => { 
       setUserQuery(event.target.value)
     }
   
@@ -68,12 +69,14 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
 
     const cityHandler = (city) =>{
         setUserQuery(city)
-        console.log(city, userQuery)
-        getGeoLocation()
     }
 
-    useEffect(()=> {},[userQuery])
 
+    useEffect(()=>{
+        if(userQuery){
+            getGeoLocation()
+        }
+    },[userQuery])
 
     const apiKey = `${process.env.REACT_APP_WEATHER_API_KEY}`
 
@@ -113,6 +116,15 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
             wind: toKMpH(res.data.current.wind_speed),
             humidity: `${res.data.current.humidity}%`
         })
+
+        let daily = res.data.daily
+
+
+        console.log((daily.map(item => item.weather.map(item => item.icon))).flat(1))
+        console.log(daily.map(item => item.temp.min))
+        console.log(daily.map(item => item.temp.max))
+        console.log(daily.map(item => item.wind_speed))
+        console.log(daily.map(item => item.humidity))
 
         } catch (error) {
             console.log('Error message: ', error);

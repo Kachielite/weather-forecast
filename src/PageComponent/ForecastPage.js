@@ -3,7 +3,8 @@ import {Link} from 'react-router-dom';
 import SwitchDisplay from '../AppComponents/SwitchDisplay';
 import SearchHistory from '../AppComponents/SearchHistory'
 import SwitchButton from '../AppComponents/SwitchButton';
-import Loading from '../AppComponents/Loading'
+import Loading from '../AppComponents/Loading';
+import Table from '../AppComponents/Table';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import {WeatherContext} from '../DataStore/WeatherContext'
@@ -56,7 +57,7 @@ const ForecastPage = () => {
                         <SwitchDisplay/>
                     </div>
                     <div className="visual-div">
-                        
+                        <Table/>
                     </div>
                 </div>
                 <div className="link">
