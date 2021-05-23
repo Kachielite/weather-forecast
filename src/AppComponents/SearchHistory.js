@@ -51,6 +51,8 @@ export default function SearchHistory() {
 
   const {searched, cityHandler} = useContext(WeatherContext);
 
+  
+
   return (
     <React.Fragment>
       <CssBaseline />

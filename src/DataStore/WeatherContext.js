@@ -26,10 +26,13 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
     }
   
     const onSubmit = (event) =>{
-      event.preventDefault()
-      setSearched([{cityName:userQuery.charAt(0).toUpperCase() + userQuery.slice(1), checkedOn: getTime()},...searched])
-      getGeoLocation()
-      switchPage()
+            if(userQuery === " "){
+                }else{
+            event.preventDefault()
+            setSearched([{cityName:userQuery.charAt(0).toUpperCase() + userQuery.slice(1), checkedOn: getTime()},...searched])
+            getGeoLocation()
+            switchPage()
+          }
     }
 
     const history = useHistory();
@@ -73,8 +76,6 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
         for (let i = 0; i <= daysRequired; i++) {
           days.push( moment().add(i, 'days').format('dddd, D') )
         }
-
-        console.log(days)
         
         setWeekDays(days.slice(1))
 
@@ -96,6 +97,8 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
             getGeoLocation()
         }
     },[userQuery])
+
+
 
     const apiKey = `${process.env.REACT_APP_WEATHER_API_KEY}`
 
@@ -153,7 +156,7 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
         // console.log(daily.map(item => item.temp.min))
         // console.log(daily.map(item => item.temp.max))
         // console.log(daily.map(item => item.wind_speed))
-        console.log(daily.map(item => item.humidity))
+
 
         } catch (error) {
             console.log('Error message: ', error);

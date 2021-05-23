@@ -14,7 +14,7 @@ h3{
     flex-direction: column;
     text-align: center;
     width:90vw;
-    height:100vh
+    height:100%
   }
 
 .weather-details{

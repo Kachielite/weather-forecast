@@ -3,7 +3,7 @@ import SwitchSelector from "react-switch-selector";
 
 
 
-const SwitchDisplay = () =>{
+const SwitchDisplay = (props) =>{
 
     const options = [
         {
@@ -20,9 +20,10 @@ const SwitchDisplay = () =>{
       
      const onChange = (newValue) => {
          console.log(newValue);
+         props.toggleDisplay(newValue)
      };
       
-     const initialSelectedIndex = options.findIndex(({value}) => value === "chart");
+     const initialSelectedIndex = options.findIndex(({value}) => value ==="table");
       
      return (
          <div  style={{width: 250, height: 42, fontSize: 18, color: '#fff', backgroundColor: "#B6B5B5"}}>

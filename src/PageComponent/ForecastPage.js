@@ -5,6 +5,7 @@ import SearchHistory from '../AppComponents/SearchHistory'
 import SwitchButton from '../AppComponents/SwitchButton';
 import Loading from '../AppComponents/Loading';
 import Table from '../AppComponents/Table';
+import Chart from '../AppComponents/Chart';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import {WeatherContext} from '../DataStore/WeatherContext'
@@ -20,12 +21,21 @@ const ForecastPage = () => {
     const {city, checkedOn, tempInCel, tempInFah, wind, humidity} = currentCondition
    
     const [searchHistory, setSearchHistory] = useState(true)
+    const [selected, setSelected] = useState('table')
 
     const searchHistoryHandler = () =>{
         if(searchHistory){
             setSearchHistory(false)
         }else{
             setSearchHistory(true)
+        }
+    }
+
+    const View = () => {
+        if(selected === "chart"){
+            return <Chart/>
+        } else{
+            return <Table/>
         }
     }
 
@@ -54,10 +64,10 @@ const ForecastPage = () => {
                 <div className="visual-details">
                     <div className="display-div">
                         <h3>Forecast for next 7 days</h3>
-                        <SwitchDisplay/>
+                        <SwitchDisplay toggleDisplay={setSelected}/>
                     </div>
                     <div className="visual-div">
-                        <Table/>
+                        <View/>
                     </div>
                 </div>
                 <div className="link">
