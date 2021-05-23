@@ -27,7 +27,7 @@ class SwitchButton extends Component {
                     onChange={this.handleChange}
                     handleDiameter={38}
                     offColor="#B6B5B5"
-                    onColor="#4FBC90"
+                    onColor="#3F51B5"
                     offHandleColor="#fff"
                     onHandleColor="#fff"
                     height={38}
@@ -85,7 +85,7 @@ class SwitchButton extends Component {
                         justifyContent: "center",
                         alignItems: "center",
                         height: "100%",
-                        color: "#4FBC90",
+                        color: "#3F51B5",
                         fontSize: 20
                         }}
                     >

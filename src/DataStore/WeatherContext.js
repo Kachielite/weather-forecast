@@ -1,5 +1,6 @@
 import {createContext,useEffect,useState} from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import { useHistory } from "react-router-dom";
 
 
@@ -13,7 +14,8 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
     const [userQuery, setUserQuery,] = useState('');
     const [searched, setSearched] = useState([])
     const [currentCondition, setCurrentCondition] = useState({})
-    const [dailyConditions, setDailyConditions] = useState([])
+    const [dailyConditions, setDailyConditions] = useState({})
+    const [weekdays, setWeekDays] = useState([])
     const [loading, setLoading] = useState(false)
 
 
@@ -37,33 +39,50 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
     }
     
     const getTime = () =>{
-        let today = new Date();
-        let date = today.getDate()+'-'+((`${today.getMonth()+1}`).length ===1 ?(`0${today.getMonth()+1}`):(today.getMonth()+1))+'-'+today.getFullYear();
-        let time = today.getHours() + ":" + today.getMinutes() 
-        let dateTime = date+' '+time;   
+        let date = moment().format('DD-MM-YYYY')
+        let time = moment().format('HH:mm')
+        let dateTime = date + " " + time;
 
         return dateTime
     }
 
     const apiDate = (dt) =>{
-        let today = new Date(dt * 1000);
-        let date = today.getDate()+'-'+((`${today.getMonth()+1}`).length ===1 ?(`0${today.getMonth()+1}`):(today.getMonth()+1))+'-'+today.getFullYear();
-        let time = ((`${today.getHours()+1}`).length ===1 ?(`0${today.getHours()+1}`):(today.getHours()+1)) + ":" + ((`${today.getMinutes()+1}`).length ===1 ?(`0${today.getMinutes()+1}`):(today.getMinutes()+1)) 
+        let date = moment.unix(dt).format('DD-MM-YYYY')
+        let time = moment.unix(dt).format('HH:mm')
         let dateTime = date+' '+time;   
         return dateTime
     }
 
     const toCelsius = (temp) => {
-        return (`${(temp - 273.14).toFixed(2)}°C`)
+        return (`${(temp - 273.14).toFixed(2)}`)
     }
 
     const toFahrenheit = (temp) =>{
-        return (`${((temp * (9/5)) - 459.67).toFixed(2)}°F`)
+        return (`${((temp * (9/5)) - 459.67).toFixed(2)}`)
     }
 
     const toKMpH = (wind) =>{
-        return (`${(wind * (36/10)).toFixed(2)}Km/h`)
+        return (`${(wind * (36/10)).toFixed(2)}`)
     }
+
+    
+    const next7Days = () => {
+        let days = [];
+        let daysRequired = 7
+        
+        for (let i = 0; i <= daysRequired; i++) {
+          days.push( moment().add(i, 'days').format('dddd, D') )
+        }
+
+        console.log(days)
+        
+        setWeekDays(days.slice(1))
+
+    }
+     
+        
+    
+
 
     //History Tiles Action
 
@@ -83,7 +102,7 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
     //Convert CityName to Latitude and Longitude
     const getGeoLocation= async ()=>{
         setLoading(true)
-
+        next7Days()
         const url = `http://api.openweathermap.org/geo/1.0/direct?q=${userQuery}&appid=${apiKey}`;
         
         try {
@@ -100,6 +119,8 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
         }
     }
 
+ 
+
     // Get weather details
     const getWeatherDetails = async (lat, lon)=>{
         setLoading(true)
@@ -112,18 +133,26 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
         setCurrentCondition({
             city:userQuery, 
             checkedOn: apiDate(res.data.current.dt), 
-            temp: `${toCelsius(res.data.current.temp)} / ${toFahrenheit(res.data.current.temp)}` ,
+            tempInCel: toCelsius(res.data.current.temp),
+            tempInFah: toFahrenheit(res.data.current.temp),
             wind: toKMpH(res.data.current.wind_speed),
             humidity: `${res.data.current.humidity}%`
         })
 
-        let daily = res.data.daily
+        let daily = res.data.daily.slice(1)
 
+        setDailyConditions({
+            weatherIcon: (daily.map(item => item.weather.map(item => item.icon))).flat(1),
+            tempMin: daily.map(item => toCelsius(item.temp.min)),
+            tempMax: daily.map(item => toCelsius(item.temp.max)),
+            windSpeed: daily.map(item => toKMpH(item.wind_speed)),
+            humidity: daily.map(item => item.humidity)
+        })
 
-        console.log((daily.map(item => item.weather.map(item => item.icon))).flat(1))
-        console.log(daily.map(item => item.temp.min))
-        console.log(daily.map(item => item.temp.max))
-        console.log(daily.map(item => item.wind_speed))
+        // console.log((daily.map(item => item.weather.map(item => item.icon))).flat(1))
+        // console.log(daily.map(item => item.temp.min))
+        // console.log(daily.map(item => item.temp.max))
+        // console.log(daily.map(item => item.wind_speed))
         console.log(daily.map(item => item.humidity))
 
         } catch (error) {
@@ -138,7 +167,7 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
 
 
     return(
-        <WeatherContext.Provider value={{searchHandler, onSubmit, searched, userQuery, currentCondition, cityHandler, setUserQuery, loading}}>
+        <WeatherContext.Provider value={{searchHandler, onSubmit, searched, userQuery, currentCondition, cityHandler, setUserQuery, loading, dailyConditions, weekdays}}>
             {props.children}
         </WeatherContext.Provider>
     )

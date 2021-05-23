@@ -17,7 +17,7 @@ const ForecastPage = () => {
 
     const {currentCondition, loading} = useContext(WeatherContext)
 
-    const {city, checkedOn, temp, wind, humidity} = currentCondition
+    const {city, checkedOn, tempInCel, tempInFah, wind, humidity} = currentCondition
    
     const [searchHistory, setSearchHistory] = useState(true)
 
@@ -45,8 +45,8 @@ const ForecastPage = () => {
                 <Grid item xs={12} sm={6} md={4}>
                     <div className="weather-div">
                         <h3>Current weather details</h3>
-                        <h3>Temperature: {temp}</h3>
-                        <h3>Wind: {wind}</h3>
+                        <h3>Temperature: {tempInCel}°C / {tempInFah}°F</h3>
+                        <h3>Wind: {wind}KM/h</h3>
                         <h3>Humidity: {humidity}</h3>
                     </div>
                 </Grid>
