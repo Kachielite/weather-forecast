@@ -21,7 +21,6 @@ class SwitchButton extends Component {
       return (
         <label>
           <label htmlFor="small-radius-switch">
-                {/* <span>A switch all available styling options</span> */}
                 <Switch
                     checked={this.state.checked}
                     onChange={this.handleChange}

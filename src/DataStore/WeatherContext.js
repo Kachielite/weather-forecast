@@ -95,6 +95,7 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
 
     const cityHandler = (cityClicked) =>{
         setUserQuery(cityClicked)
+        getGeoLocation()
     }
 
     // useEffect(()=>{

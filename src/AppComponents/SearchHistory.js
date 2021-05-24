@@ -1,5 +1,5 @@
 import React,{useContext} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -10,7 +10,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
 import {WeatherContext} from '../DataStore/WeatherContext';
 
 
@@ -18,11 +17,11 @@ import {WeatherContext} from '../DataStore/WeatherContext';
 
 
 
-const useStyles = makeStyles((theme) => ({
-
+const useStyles = makeStyles(() => ({
+  container:{
+    backgroundColor: "#F5F5F5"
+  },
   cardGrid: {
-    // paddingTop: theme.spacing(4),
-    // paddingBottom: theme.spacing(4),
     width:'100%',
     height:'100%'
   },
@@ -51,6 +50,14 @@ export default function SearchHistory() {
 
   const {searched, cityHandler} = useContext(WeatherContext);
 
+
+    const location = useLocation();
+    
+    let limit = 0;
+    location.pathname === "/"?limit = 9: limit = 3
+    
+ 
+
   
 
   return (
@@ -60,7 +67,7 @@ export default function SearchHistory() {
         <Paper className={classes.container}>
         <Container className={classes.cardGrid} >
           <Grid container spacing={3}>
-            {searched.slice(0,9).map((card) => {
+            {searched.slice(0,limit).map((card) => {
               return(
               <Grid item xs={12} sm={6} md={4} key={card.id}>
                 <CardActionArea onClick={() => cityHandler(card.cityName)}>
