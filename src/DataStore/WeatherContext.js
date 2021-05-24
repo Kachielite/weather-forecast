@@ -40,13 +40,17 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
         }
       }
 
-      useEffect(() => {
+    useEffect(() => {
         setLocalStorage("userQuery", userQuery);
         setLocalStorage("currentCondition", currentCondition);
         setLocalStorage("dailyConditions", dailyConditions);
         setLocalStorage("searched", searched);
         setLocalStorage("weekdays", weekdays);
       }, [userQuery, currentCondition, dailyConditions, searched,weekdays]);
+
+    useEffect(()=>{
+        setUserQuery(query)
+    },[query])
 
   
     const searchHandler = (event) => { 
@@ -61,7 +65,7 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
                 return;
             }else{
             setUserQuery(query)
-            getGeoLocation()
+            getGeoLocation(userQuery)
             switchPage()
           }
     }
@@ -119,26 +123,15 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
     //History Tiles Action
 
     const cityHandler = (cityClicked) =>{
-        setUserQuery(cityClicked)
-        getGeoLocation()
+        getGeoLocation(cityClicked)
     }
 
-    // useEffect(()=>{
-    //     if(userQuery){
-    //         getGeoLocation()
-    //     }
-    // },[userQuery])
 
-    useEffect(()=>{
-        setUserQuery(query)
-    },[query])
-
-    
 
     const apiKey = `${process.env.REACT_APP_WEATHER_API_KEY}`
 
     
-    const getGeoLocation= async ()=>{
+    const getGeoLocation= async (userQuery)=>{
         setLoading(true)
         next7Days()
 
