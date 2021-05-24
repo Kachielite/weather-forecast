@@ -12,16 +12,41 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
 
     //Getting user request
     const [query, setQuery] = useState("")
-    const [userQuery, setUserQuery,] = useState('');
-    const [searched, setSearched] = useState([])
-    const [currentCondition, setCurrentCondition] = useState({})
-    const [dailyConditions, setDailyConditions] = useState({})
-    const [weekdays, setWeekDays] = useState([])
+    const [userQuery, setUserQuery,] = useState(() => getLocalStorage("userQuery", ""));
+    const [searched, setSearched] = useState(() => getLocalStorage("searched", []))
+    const [currentCondition, setCurrentCondition] = useState(() => getLocalStorage("currentCondition", {}))
+    const [dailyConditions, setDailyConditions] = useState(() => getLocalStorage("dailyConditions", {}))
+    const [weekdays, setWeekDays] = useState(() => getLocalStorage("weekdays", []))
     const [loading, setLoading] = useState(false)
     const [triggerError, setTriggerError] = useState(false)
     const [errMsg, setErrMsg] = useState()
 
+    function setLocalStorage(key, value) {
+        try {
+          window.localStorage.setItem(key, JSON.stringify(value));
+        } catch (e) {
+          // catch possible errors:
+          // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+        }
+      }
+      
+      function getLocalStorage(key, initialValue) {
+        try {
+          const value = window.localStorage.getItem(key);
+          return value ? JSON.parse(value) : initialValue;
+        } catch (e) {
+          // if error, return initial value
+          return initialValue;
+        }
+      }
 
+      useEffect(() => {
+        setLocalStorage("userQuery", userQuery);
+        setLocalStorage("currentCondition", currentCondition);
+        setLocalStorage("dailyConditions", dailyConditions);
+        setLocalStorage("searched", searched);
+        setLocalStorage("weekdays", weekdays);
+      }, [userQuery, currentCondition, dailyConditions, searched,weekdays]);
 
   
     const searchHandler = (event) => { 
@@ -149,10 +174,11 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
         
         if(searched.some(item => item.cityName === userQuery)) {
             let objIndex = searched.findIndex((obj => obj.cityName === userQuery));
-            searched[objIndex].checkedOn = getTime()
+            searched.splice(objIndex,1)
+            setSearched([{id: `${userQuery.substring(0,3)}${objIndex}`, cityName:userQuery.charAt(0).toUpperCase() + userQuery.toLowerCase().slice(1), checkedOn: getTime()},...searched])
 
         }else{
-            setSearched([{id: searched.length +1, cityName:userQuery.charAt(0).toUpperCase() + userQuery.toLowerCase().slice(1), checkedOn: getTime()},...searched])
+            setSearched([{id: `${userQuery.substring(0,3)}${searched.length + 1}`, cityName:userQuery.charAt(0).toUpperCase() + userQuery.toLowerCase().slice(1), checkedOn: getTime()},...searched])
         }
 
         
