@@ -56,7 +56,7 @@ const ForecastPage = () => {
                     <div className="weather-div">
                         <h3>Current weather details</h3>
                         <h3>Temperature: {tempInCel}°C / {tempInFah}°F</h3>
-                        <h3>Wind: {wind}KM/h</h3>
+                        <h3>Wind: {wind}Km/h</h3>
                         <h3>Humidity: {humidity}</h3>
                     </div>
                 </Grid>
@@ -72,7 +72,7 @@ const ForecastPage = () => {
                 </div>
                 <div className="link">
                     <Button color="primary" variant="outlined" >
-                        <Link to='/' style={{textDecoration:'none'}}>
+                        <Link to='/' style={{textDecoration:'none', outline:"none"}}>
                             <p>Go to home page</p>
                         </Link>
                     </Button>

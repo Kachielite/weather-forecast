@@ -14,7 +14,7 @@ h3{
     flex-direction: column;
     text-align: center;
     width:90vw;
-    height:100%
+    height: 100%;
   }
 
 .weather-details{
@@ -48,6 +48,7 @@ h3{
 
 .visual-div{
     margin: 3px auto;
+    flex-grow: 1;
 }
 
 .link{

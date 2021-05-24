@@ -74,7 +74,7 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
         let daysRequired = 7
         
         for (let i = 0; i <= daysRequired; i++) {
-          days.push( moment().add(i, 'days').format('dddd, D') )
+          days.push( moment().add(i, 'days').format('ddd, D') )
         }
         
         setWeekDays(days.slice(1))
