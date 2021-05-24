@@ -19,7 +19,6 @@ const SwitchDisplay = (props) =>{
      ];
       
      const onChange = (newValue) => {
-         console.log(newValue);
          props.toggleDisplay(newValue)
      };
       

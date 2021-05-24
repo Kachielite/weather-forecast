@@ -69,7 +69,7 @@ export default function CustomizedTables() {
           <TableRow>
             <StyledTableCell >Days</StyledTableCell>
             {weekdays.map(item => {
-              return <StyledTableCell align="center">{item}</StyledTableCell>
+              return <StyledTableCell align="center" key={item}>{item}</StyledTableCell>
             })}
           </TableRow>
         </TableHead>

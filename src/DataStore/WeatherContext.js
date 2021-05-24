@@ -11,25 +11,31 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
 
 
     //Getting user request
+    const [query, setQuery] = useState("")
     const [userQuery, setUserQuery,] = useState('');
     const [searched, setSearched] = useState([])
     const [currentCondition, setCurrentCondition] = useState({})
     const [dailyConditions, setDailyConditions] = useState({})
     const [weekdays, setWeekDays] = useState([])
     const [loading, setLoading] = useState(false)
+    const [triggerError, setTriggerError] = useState(false)
+    const [errMsg, setErrMsg] = useState()
 
 
 
   
     const searchHandler = (event) => { 
-      setUserQuery(event.target.value)
+      setQuery(event.target.value)
+      
     }
   
     const onSubmit = (event) =>{
-            if(userQuery === " "){
-                }else{
-            event.preventDefault()
-            setSearched([{cityName:userQuery.charAt(0).toUpperCase() + userQuery.slice(1), checkedOn: getTime()},...searched])
+        setUserQuery(query)
+        event.preventDefault()
+            if(userQuery === ""){
+                return;
+            }else{
+            setUserQuery(query)
             getGeoLocation()
             switchPage()
           }
@@ -87,62 +93,49 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
 
     //History Tiles Action
 
-    const cityHandler = (city) =>{
-        setUserQuery(city)
+    const cityHandler = (cityClicked) =>{
+        setUserQuery(cityClicked)
     }
 
+    // useEffect(()=>{
+    //     if(userQuery){
+    //         getGeoLocation()
+    //     }
+    // },[userQuery])
 
     useEffect(()=>{
-        if(userQuery){
-            getGeoLocation()
-        }
-    },[userQuery])
+        setUserQuery(query)
+    },[query])
 
-
+    
 
     const apiKey = `${process.env.REACT_APP_WEATHER_API_KEY}`
 
-    //Convert CityName to Latitude and Longitude
+    
     const getGeoLocation= async ()=>{
         setLoading(true)
         next7Days()
+
+        //Convert CityName to Latitude and Longitude
         const url = `http://api.openweathermap.org/geo/1.0/direct?q=${userQuery}&appid=${apiKey}`;
-        
         try {
         const res = await axios.get(url)
-        // setGeoLocation({lat:res.data[0].lat, lon:res.data[0].lon})
-        getWeatherDetails(res.data[0].lat, res.data[0].lon )
+        let lat = res.data[0].lat;
+        let lon = res.data[0].lon
         
-
-        } catch (error) {
-            console.log('Error message: ', error);
-
-        } finally {
-            
-        }
-    }
-
- 
-
-    // Get weather details
-    const getWeatherDetails = async (lat, lon)=>{
-        setLoading(true)
-
-        const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}`;
-        
-        try {
-        const res = await axios.get(url)
-       
+        // Get weather details
+        const url2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}`;
+        const res2 = await axios.get(url2)
         setCurrentCondition({
             city:userQuery, 
-            checkedOn: apiDate(res.data.current.dt), 
-            tempInCel: toCelsius(res.data.current.temp),
-            tempInFah: toFahrenheit(res.data.current.temp),
-            wind: toKMpH(res.data.current.wind_speed),
-            humidity: `${res.data.current.humidity}%`
+            checkedOn: apiDate(res2.data.current.dt), 
+            tempInCel: toCelsius(res2.data.current.temp),
+            tempInFah: toFahrenheit(res2.data.current.temp),
+            wind: toKMpH(res2.data.current.wind_speed),
+            humidity: `${res2.data.current.humidity}%`
         })
 
-        let daily = res.data.daily.slice(1)
+        let daily = res2.data.daily.slice(1)
 
         setDailyConditions({
             weatherIcon: (daily.map(item => item.weather.map(item => item.icon))).flat(1),
@@ -152,25 +145,36 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
             humidity: daily.map(item => item.humidity)
         })
 
-        // console.log((daily.map(item => item.weather.map(item => item.icon))).flat(1))
-        // console.log(daily.map(item => item.temp.min))
-        // console.log(daily.map(item => item.temp.max))
-        // console.log(daily.map(item => item.wind_speed))
+        
+        if(searched.some(item => item.cityName === userQuery)) {
+            let objIndex = searched.findIndex((obj => obj.cityName === userQuery));
+            searched[objIndex].checkedOn = getTime()
 
+        }else{
+            setSearched([{id: searched.length +1, cityName:userQuery.charAt(0).toUpperCase() + userQuery.toLowerCase().slice(1), checkedOn: getTime()},...searched])
+        }
+
+        
 
         } catch (error) {
-            console.log('Error message: ', error);
+            console.log('Error message: ', error.message);
+            setTriggerError(true)
+            if (error.message === "Network Error"){
+                setErrMsg("Unable to connect. Please check your internet connection")
+            } else if(error.message.data === undefined){
+                setErrMsg("Place not found or misspelled")
+            } 
+            history.push(`/`)
 
         } finally {
             setLoading(false)
-            
-            
         }
     }
 
 
+
     return(
-        <WeatherContext.Provider value={{searchHandler, onSubmit, searched, userQuery, currentCondition, cityHandler, setUserQuery, loading, dailyConditions, weekdays}}>
+        <WeatherContext.Provider value={{searchHandler, onSubmit, searched, userQuery, currentCondition, cityHandler, setUserQuery, loading, dailyConditions, weekdays, errMsg, triggerError, setTriggerError}}>
             {props.children}
         </WeatherContext.Provider>
     )

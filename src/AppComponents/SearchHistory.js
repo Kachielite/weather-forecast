@@ -62,12 +62,12 @@ export default function SearchHistory() {
           <Grid container spacing={3}>
             {searched.slice(0,9).map((card) => {
               return(
-              <Grid item xs={12} sm={6} md={4} key={card.cityName}>
+              <Grid item xs={12} sm={6} md={4} key={card.id}>
                 <CardActionArea onClick={() => cityHandler(card.cityName)}>
                   <Link to={`/forecast/${card.cityName.charAt(0).toLowerCase() + card.cityName.slice(1)}`} className={classes.link}>
                     <Card className={classes.card} >
                       <CardContent className={classes.cardContent}>
-                        <Typography gutterBottom variant="h7" component="h2">
+                        <Typography gutterBottom variant="h5">
                             {card.cityName}
                         </Typography>
                         <Typography>

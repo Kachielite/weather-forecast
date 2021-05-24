@@ -47,7 +47,7 @@ const ForecastPage = () => {
                 <Grid item xs={12} sm={6} md={4} >
                 <div >
                     <div className="city-div">
-                        <h1>{city.charAt(0).toUpperCase() + city.slice(1)}</h1>
+                        <h1>{city.charAt(0).toUpperCase() + city.toLowerCase().slice(1)}</h1>
                         <h3>{checkedOn}</h3>
                     </div>
                 </div>
