@@ -40,7 +40,7 @@ export default function Search(props) {
 
   return (
     <Paper component="form" className={classes.root} onSubmit={onSubmit}>
-        <IconButton type="submit" className={classes.iconButton} aria-label="search" >
+        <IconButton type="submit" className={classes.iconButton} aria-label="search">
             <SearchIcon />
         </IconButton>
         <Divider className={classes.divider} orientation="vertical" />

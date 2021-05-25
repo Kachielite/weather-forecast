@@ -4,14 +4,14 @@ import moment from 'moment';
 import { useHistory } from "react-router-dom";
 
 
+//Create Weather Context
+export const WeatherContext = createContext(); 
 
-export const WeatherContext = createContext(); //create Weather Context
+//Create WeatherContext Provider
+export const WeatherProvider = (props) => {     
 
-export const WeatherProvider = (props) => {     //Create WeatherContext Provider
-
-
-    //Getting user request
-    const [query, setQuery] = useState("")
+    
+    const [query, setQuery] = useState("") 
     const [userQuery, setUserQuery,] = useState(() => getLocalStorage("userQuery", ""));
     const [searched, setSearched] = useState(() => getLocalStorage("searched", []))
     const [currentCondition, setCurrentCondition] = useState(() => getLocalStorage("currentCondition", {}))
@@ -59,14 +59,16 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
     }
   
     const onSubmit = (event) =>{
-        setUserQuery(query)
+        setQuery("")
         event.preventDefault()
             if(userQuery === ""){
+                setTriggerError(true)
+                setErrMsg("You must provide the name of the city to get weather forecast")
                 return;
             }else{
-            setUserQuery(query)
-            getGeoLocation(userQuery)
-            switchPage()
+                setUserQuery(query)
+                getGeoLocation(userQuery)
+                switchPage()
           }
     }
 
@@ -116,12 +118,9 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
 
     }
      
-        
-    
 
 
     //History Tiles Action
-
     const cityHandler = (cityClicked) =>{
         getGeoLocation(cityClicked)
     }
@@ -182,7 +181,7 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
             if (error.message === "Network Error"){
                 setErrMsg("Unable to connect. Please check your internet connection")
             } else if(error.message.data === undefined){
-                setErrMsg("Place not found or misspelled")
+                setErrMsg("No records found. Please ensure that the name of the city is well spelled")
             } 
             history.push(`/`)
 
@@ -194,7 +193,7 @@ export const WeatherProvider = (props) => {     //Create WeatherContext Provider
 
 
     return(
-        <WeatherContext.Provider value={{searchHandler, onSubmit, searched, userQuery, currentCondition, cityHandler, setUserQuery, loading, dailyConditions, weekdays, errMsg, triggerError, setTriggerError}}>
+        <WeatherContext.Provider value={{searchHandler, onSubmit, searched, userQuery, currentCondition, cityHandler, setUserQuery, loading, dailyConditions, weekdays, errMsg, triggerError, setTriggerError,query}}>
             {props.children}
         </WeatherContext.Provider>
     )

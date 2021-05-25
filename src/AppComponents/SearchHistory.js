@@ -66,7 +66,7 @@ export default function SearchHistory() {
       <main>
         <Paper className={classes.container}>
         <Container className={classes.cardGrid} >
-          <Grid container spacing={3}>
+          <Grid container spacing={5}>
             {searched.slice(0,limit).map((card) => {
               return(
               <Grid item xs={12} sm={6} md={4} key={card.id}>

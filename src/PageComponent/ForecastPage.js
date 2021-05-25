@@ -41,29 +41,33 @@ const ForecastPage = () => {
 
     return(
         <React.Fragment>
-        {loading?<Loading/>:
+        {loading?
+            <div className="loading">
+                <Loading/>
+            </div>
+            :
             <div className="forecast-div">
                 <Grid container spacing={5} className="weather-details">
                 <Grid item xs={12} sm={6} md={4} >
                 <div >
                     <div className="city-div">
                         <h1>{city.charAt(0).toUpperCase() + city.toLowerCase().slice(1)}</h1>
-                        <h3>{checkedOn}</h3>
+                        <p>{checkedOn}</p>
                     </div>
                 </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
                     <div className="weather-div">
-                        <h3>Current weather details</h3>
-                        <h3>Temperature: {tempInCel}°C / {tempInFah}°F</h3>
-                        <h3>Wind: {wind}Km/h</h3>
-                        <h3>Humidity: {humidity}</h3>
+                        <h2>Current weather details</h2>
+                        <p>Temperature: {tempInCel}°C / {tempInFah}°F</p>
+                        <p>Wind: {wind}Km/h</p>
+                        <p>Humidity: {humidity}</p>
                     </div>
                 </Grid>
                 </Grid>
                 <div className="visual-details">
                     <div className="display-div">
-                        <h3>Forecast for next 7 days</h3>
+                        <p>Forecast for next 7 days</p>
                         <SwitchDisplay toggleDisplay={setSelected}/>
                     </div>
                     <div className="visual-div">
@@ -71,14 +75,14 @@ const ForecastPage = () => {
                     </div>
                 </div>
                 <div className="link">
-                    <Button color="primary" variant="outlined" >
-                        <Link to='/' style={{textDecoration:'none', outline:"none"}}>
+                    <Button variant="contained" color="primary" >
+                        <Link to='/' style={{textDecoration:'none', outline:"none", color:"white"}}>
                             <p>Go to home page</p>
                         </Link>
                     </Button>
                 </div>
                 <div className="history-div">
-                    <div style={{display:'flex', alignItems:'flex-start', margin: '20px auto'}}><SwitchButton searchHistoryHandler={searchHistoryHandler}/></div>
+                    <div style={{display:'flex', alignItems:'flex-start', marginBottom:'40px', }}><SwitchButton searchHistoryHandler={searchHistoryHandler}/></div>
                     {searchHistory && <SearchHistory/>}
                 </div>
             </div>}

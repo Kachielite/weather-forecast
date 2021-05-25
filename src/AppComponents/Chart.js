@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     display:'flex',
     justifyContent:'center',
     background:"#FFFF",
-    width:'90vw',
+    width:'88vw',
     height:'42vh'
 
   },
