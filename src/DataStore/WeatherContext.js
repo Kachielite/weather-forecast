@@ -179,7 +179,8 @@ export const WeatherProvider = (props) => {
             humidity: daily.map(item => item.humidity)
         })
 
-        
+     /*This checks if there has been previous search for the queried city. If yes, then it updates the checked on time and adds it at the beginning of the searched array otherwise
+     it adds the city to the searched array*/
         if(searched.some(item => item.cityName === userQuery)) {
             let objIndex = searched.findIndex((obj => obj.cityName === userQuery));
             searched.splice(objIndex,1)
