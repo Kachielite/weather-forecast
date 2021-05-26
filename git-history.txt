@@ -1,0 +1,179 @@
+* commit 2e0e308faa756e45aba6dcb25cc0b3b82e574142
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Wed May 26 19:42:29 2021 +0100
+| 
+|     add app link to readme and redirect to home for no found route pages
+| 
+* commit f3139643eb50e987271fbdf45c0fd6e90c5434e2
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Wed May 26 18:54:58 2021 +0100
+| 
+|     Add more comments
+| 
+* commit f356ebd83a3885789e8c23d163ad3823363e3bc4
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Wed May 26 18:41:04 2021 +0100
+| 
+|     personalize the readme.md file
+| 
+* commit f9dd2e723fd2b176343623559847417c291d4d4c
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Wed May 26 18:09:57 2021 +0100
+| 
+|     Add comments to code and fix minor styling issues to make it reponsive
+| 
+* commit e301572d404ae78f2bc77de10ca42844b451390d
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Wed May 26 00:24:49 2021 +0100
+| 
+|     refactor code and fix styling for components
+| 
+* commit 48cb81c1348fafe476772100766740be58728063
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Tue May 25 00:18:02 2021 +0100
+| 
+|     fix the bug with immediate state update
+| 
+* commit a248ff28d27d7a1046dba182f86c8dd35ff5fd52
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Mon May 24 20:06:30 2021 +0100
+| 
+|     made context persistent using localStorage
+| 
+* commit 86384fc61a0a1e6e3e32accd1934e1c304961b6b
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Mon May 24 19:02:05 2021 +0100
+| 
+|     fix the limit of searched city in the search history component
+| 
+* commit 6c7c804d6a4eaab2fd1fa4a956ad5b41fdc03b24
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Mon May 24 18:20:20 2021 +0100
+| 
+|     Implement feedback for API errors and fix errors due to missing key props
+| 
+* commit 6f517457e15df8c21c0df21db2428bec85256c58
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Mon May 24 12:04:30 2021 +0100
+| 
+|     Make div for table/chart fixed
+| 
+* commit 414d97da962a5bbb4e21342b44a1cff44f97f302
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Sun May 23 23:48:08 2021 +0100
+| 
+|     Implement Chart view form for API response
+| 
+* commit 9dc9af2f047f691da6830f9a3c21cdfdda99a772
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Sun May 23 01:18:47 2021 +0100
+| 
+|     Implement data in tabular form
+| 
+* commit 945a4b75669e7e1e9c05e6c292754dbc345a9245
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Sat May 22 00:59:03 2021 +0100
+| 
+|     Extract daily conditions from API response to the dailyCondition object
+| 
+* commit 593026ec3a195c5d3f53970c77dcb80ca44a996d
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Fri May 21 00:16:46 2021 +0100
+| 
+|     Add loading effect when API is querying the requested data
+| 
+* commit 8d1c60bc569362a6f1e9b514b9c84d94a120c3ed
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Thu May 20 00:40:16 2021 +0100
+| 
+|     Implement API data on the current weather condition to the forecast page
+| 
+* commit 514b43fac0f04fd1e3a212bff1101fafb0f36bc9
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Wed May 19 22:31:39 2021 +0100
+| 
+|     Move API key to .env file to keep it secure and not commit
+| 
+* commit face1de01cbd5800064b23971e6a1b4f72f1da94
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Tue May 18 23:23:50 2021 +0100
+| 
+|     Create Context for passing fectched data to components, Implement API call for geolocation and weather details
+| 
+* commit 9bb8d16af608f84bf1328aeb21547e18939dc38d
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Tue May 18 19:29:17 2021 +0100
+| 
+|     UI for the app is complete
+| 
+* commit e9e86cacd8c05fe570be7d06fdfef84287f1f9f0
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Mon May 17 22:40:42 2021 +0100
+| 
+|     Add return to home button, history toggle and search history component to the forecast page
+| 
+* commit 80a3b49a7ff0d7b78110783a050413c7e9edfcce
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Mon May 17 21:32:43 2021 +0100
+| 
+|     Forecast page is developed on a new branch. Add weather details div and switchDisplay button
+| 
+* commit 9ad7cc5d11218ac5f28c3e14da46a431ed7cd445
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Mon May 17 14:13:58 2021 +0100
+| 
+|     Implement routing when clicking tiles in the searchHistroy Component
+| 
+* commit 53e9719b364387a3298aabec491b8cd63e88f844
+| Author: Derrick <derrick.onyekachi@gmail.com>
+| Date:   Mon May 17 12:54:44 2021 +0100
+| 
+|     Merge Homepage branch to master, create Forecast page and install react router
+| 
+* commit e78d03237daa5bad12baf048c54e9fe92e40b9b0
+| Author: Derrick Kachi <derrick.onyekachi@gmail.com>
+| Date:   Sat May 15 20:05:02 2021 +0100
+| 
+|     Add feedback effect to SearchHistory card component
+| 
+* commit f46364deef9bbfd873c515d16e034d87d7dc1ded
+| Author: Derrick Kachi <derrick.onyekachi@gmail.com>
+| Date:   Sat May 15 19:51:35 2021 +0100
+| 
+|     SearchHistory cards made clickable
+| 
+* commit e5f809b40d1f6c6adc3e0887834858b84c3249ce
+| Author: Derrick Kachi <derrick.onyekachi@gmail.com>
+| Date:   Sat May 15 19:07:13 2021 +0100
+| 
+|     SearchHistory component made reponsive
+| 
+* commit 06367f21a1496ab8d24eb28708361b5a83c34bb6
+| Author: Derrick Kachi <derrick.onyekachi@gmail.com>
+| Date:   Sat May 15 14:46:40 2021 +0100
+| 
+|     Create and style SearchHistory component
+| 
+* commit 75e29e775222ddb4b6f5a8dfbba7c5ca460e9f90
+| Author: Derrick Kachi <derrick.onyekachi@gmail.com>
+| Date:   Sat May 15 12:46:28 2021 +0100
+| 
+|     Create and style SwitchButton component for the search history
+| 
+* commit 8da2da388dade7ee70194989d823c86cbe68384a
+| Author: Derrick Kachi <derrick.onyekachi@gmail.com>
+| Date:   Sat May 15 01:28:57 2021 +0100
+| 
+|     Create SearchBar component and Add Search Bar to homepage
+| 
+* commit f4336aecd16957d28f77ea0595946ea47eb7f58f
+| Author: Derrick Kachi <derrick.onyekachi@gmail.com>
+| Date:   Sat May 15 00:46:26 2021 +0100
+| 
+|     Create new branch called Homepage and Title Bar for App
+| 
+* commit b9f0e2010baf630c30741ae98305cc2fe2b9e668
+  Author: Derrick Kachi <derrick.onyekachi@gmail.com>
+  Date:   Sat May 15 00:37:41 2021 +0100
+  
+      Initialize Project using create-react-app and removing default files not needed for this project
