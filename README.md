@@ -41,6 +41,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 [Preview App](https://weather-forecast-28.netlify.app/)
 
-https://weather-forecast-28.netlify.app/
-
 This was a 2 week long project. The technologies implemented in this project are React, React-Router-Dom, Axios, ChartJS-2, MomentJS, React-Switch, React-Switch-Selector, Material-UI and a significant amount of VanillaJS, JSX, and CSS. I chose to use the create-react-app boilerplate to minimize initial setup.
