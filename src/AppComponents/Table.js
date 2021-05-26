@@ -51,7 +51,7 @@ export default function CustomizedTables() {
 
 
   const weather = (item)=>{
-    return(<img src={`http://openweathermap.org/img/wn/${item}@2x.png`} alt="weather-icon"/>)
+    return(<img src={`https://openweathermap.org/img/wn/${item}@2x.png`} alt="weather-icon"/>)
   }
 
   const rows = [

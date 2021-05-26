@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 import HomePage from './PageComponent/HomePage';
 import ForecastPage from './PageComponent/ForecastPage'
 import TitleBar from './AppComponents/TitleBar';
@@ -19,6 +19,7 @@ function App() {
         <Switch>
           <Route exact path={["/", "/forecast"]} component={HomePage}/>
           <Route exact path="/forecast/:cityName" component={ForecastPage}/>
+          <Redirect to="/" />
         </Switch>
       </div>
     </WeatherProvider>

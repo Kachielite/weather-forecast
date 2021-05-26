@@ -150,7 +150,7 @@ export const WeatherProvider = (props) => {
         next7Days()
 
     //Convert CityName to Latitude and Longitude used in the next API call
-        const url = `http://api.openweathermap.org/geo/1.0/direct?q=${userQuery}&appid=${apiKey}`;
+        const url = `https://api.openweathermap.org/geo/1.0/direct?q=${userQuery}&appid=${apiKey}`;
         try {
         const res = await axios.get(url)
         let lat = res.data[0].lat;
