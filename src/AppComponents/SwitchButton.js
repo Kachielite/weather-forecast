@@ -19,7 +19,7 @@ class SwitchButton extends Component {
   
     render() {
       return (
-        <label>
+        <label style={{border:"3px solid #ffff "}}>
           <label htmlFor="small-radius-switch">
                 <Switch
                     checked={this.state.checked}

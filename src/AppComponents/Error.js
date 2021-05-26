@@ -19,6 +19,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomizedSnackbars() {
   const classes = useStyles();
+  
+  /* Consuming context data */
   const {errMsg, setTriggerError,triggerError} = useContext(WeatherContext);
   
 

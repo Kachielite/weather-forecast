@@ -48,11 +48,11 @@ const useStyles = makeStyles(() => ({
 export default function SearchHistory() {
   const classes = useStyles();
 
+  /* Consuming context data */
   const {searched, cityHandler} = useContext(WeatherContext);
 
-
+  //This uses useLocation to define a limit of history data to be displayed depending on the current route
     const location = useLocation();
-    
     let limit = 0;
     location.pathname === "/"?limit = 9: limit = 3
     

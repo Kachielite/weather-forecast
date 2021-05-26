@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Search(props) {
 
   const classes = useStyles();
-
+  
+  /* Consuming context data */
   const {onSubmit, searchHandler} = useContext(WeatherContext)
 
 

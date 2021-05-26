@@ -25,7 +25,7 @@ const SwitchDisplay = (props) =>{
      const initialSelectedIndex = options.findIndex(({value}) => value ==="table");
       
      return (
-         <div  style={{width: 200, height: 40, fontSize: 18, color: '#fff', backgroundColor: "#B6B5B5"}}>
+         <div  style={{width: "11rem", height: "2.2rem", fontSize: 18, color: '#fff', backgroundColor: "#B6B5B5"}}>
              <SwitchSelector
                  onChange={onChange}
                  options={options}

@@ -15,14 +15,17 @@ import './forecastpage.css';
 
 const ForecastPage = () => {
 
-
+    /* Consuming context data */
     const {currentCondition, loading} = useContext(WeatherContext)
-
     const {city, checkedOn, tempInCel, tempInFah, wind, humidity} = currentCondition
    
+    /* State management for the switch button that toggles the search history component  and this is passed down to SearchHistory Component*/
     const [searchHistory, setSearchHistory] = useState(true)
+    /* State management for the SwitchDisplay component that toggles display for the 7 day weather forecast and this is passed down to SwitchDisplay Component*/
     const [selected, setSelected] = useState('table')
 
+
+    /* Toggles the SearchHistory Component */
     const searchHistoryHandler = () =>{
         if(searchHistory){
             setSearchHistory(false)
@@ -30,7 +33,7 @@ const ForecastPage = () => {
             setSearchHistory(true)
         }
     }
-
+    /* Defines what component should be rendered when switch display component is toggled */
     const View = () => {
         if(selected === "chart"){
             return <Chart/>
@@ -41,11 +44,8 @@ const ForecastPage = () => {
 
     return(
         <React.Fragment>
-        {loading?
-            <div className="loading">
-                <Loading/>
-            </div>
-            :
+        {/* Render the Loading component when component is true otherwise render the content of the forecast page */}
+        {loading?<div className="loading"><Loading/></div>:
             <div className="forecast-div">
                 <Grid container spacing={5} className="weather-details">
                 <Grid item xs={12} sm={6} md={4} >

@@ -7,9 +7,9 @@ import './homepage.css';
 
 const HomePage = () => {
 
-
+    /* State management for the SwitchButton component that toggles display for the 7 day weather forecast and this is passed down to SwitchButton Component*/
     const [searchHistory, setSearchHistory] = useState(true)
-
+    /* Toggles the SearchHistory Component */
     const searchHistoryHandler = () =>{
         if(searchHistory){
             setSearchHistory(false)
@@ -18,10 +18,6 @@ const HomePage = () => {
         }
     }
     
-
-
-
-
     return(
         <div className="home-div">
             <div className="search-div">

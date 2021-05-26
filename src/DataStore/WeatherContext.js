@@ -4,13 +4,13 @@ import moment from 'moment';
 import { useHistory } from "react-router-dom";
 
 
-//Create Weather Context
+//Creating Weather Context
 export const WeatherContext = createContext(); 
 
 //Create WeatherContext Provider
 export const WeatherProvider = (props) => {     
 
-    
+//**************************************** App State Management *************************************//    
     const [query, setQuery] = useState("") 
     const [userQuery, setUserQuery,] = useState(() => getLocalStorage("userQuery", ""));
     const [searched, setSearched] = useState(() => getLocalStorage("searched", []))
@@ -20,6 +20,10 @@ export const WeatherProvider = (props) => {
     const [loading, setLoading] = useState(false)
     const [triggerError, setTriggerError] = useState(false)
     const [errMsg, setErrMsg] = useState()
+
+
+/**************************************** Make Data Persistence **********************************************/ 
+// This solves the issue with the context getting lost when the page is refreshed. localStorage is used here
 
     function setLocalStorage(key, value) {
         try {
@@ -39,7 +43,8 @@ export const WeatherProvider = (props) => {
           return initialValue;
         }
       }
-
+      
+// useEffect watches changes in states and update the new state once a change is detected
     useEffect(() => {
         setLocalStorage("userQuery", userQuery);
         setLocalStorage("currentCondition", currentCondition);
@@ -57,11 +62,15 @@ export const WeatherProvider = (props) => {
       setQuery(event.target.value)
       
     }
+
+/*************************************** Main App Functions **********************************************/
   
+
+/* Actions triggered when the user clicks the search icon to get the weather forecast for requested city */
     const onSubmit = (event) =>{
         setQuery("")
         event.preventDefault()
-            if(userQuery === ""){
+            if(userQuery === ""){     
                 setTriggerError(true)
                 setErrMsg("You must provide the name of the city to get weather forecast")
                 return;
@@ -72,12 +81,13 @@ export const WeatherProvider = (props) => {
           }
     }
 
+/* Loads the forecast page once the user submits */
     const history = useHistory();
-    
     const switchPage = () =>{
         history.push(`forecast/${userQuery}`)
     }
-    
+
+/* Gets the timestamp the request was made by the user */    
     const getTime = () =>{
         let date = moment().format('DD-MM-YYYY')
         let time = moment().format('HH:mm')
@@ -86,6 +96,7 @@ export const WeatherProvider = (props) => {
         return dateTime
     }
 
+/* Gets the timestamp the request was made by the user */ 
     const apiDate = (dt) =>{
         let date = moment.unix(dt).format('DD-MM-YYYY')
         let time = moment.unix(dt).format('HH:mm')
@@ -93,6 +104,26 @@ export const WeatherProvider = (props) => {
         return dateTime
     }
 
+/* Gets the next seven days from the current day */ 
+    const next7Days = () => {
+        let days = [];
+        let daysRequired = 7
+        
+        for (let i = 0; i <= daysRequired; i++) {
+          days.push( moment().add(i, 'days').format('ddd, D') )
+        }
+        
+        setWeekDays(days.slice(1))
+
+    }
+
+
+/* Invoke API when one of the search history component is clicked */
+    const cityHandler = (cityClicked) =>{
+        getGeoLocation(cityClicked)
+    }
+
+/********************** Convert API data to the required units ************************/
     const toCelsius = (temp) => {
         return (`${(temp - 273.14).toFixed(2)}`)
     }
@@ -105,45 +136,30 @@ export const WeatherProvider = (props) => {
         return (`${(wind * (36/10)).toFixed(2)}`)
     }
 
-    
-    const next7Days = () => {
-        let days = [];
-        let daysRequired = 7
-        
-        for (let i = 0; i <= daysRequired; i++) {
-          days.push( moment().add(i, 'days').format('ddd, D') )
-        }
-        
-        setWeekDays(days.slice(1))
-
-    }
-     
 
 
-    //History Tiles Action
-    const cityHandler = (cityClicked) =>{
-        getGeoLocation(cityClicked)
-    }
+/*********************************** Fetch data using the OpenWeather API **********************************************/
 
-
-
+//API key is gotten from the .env file
     const apiKey = `${process.env.REACT_APP_WEATHER_API_KEY}`
 
     
     const getGeoLocation= async (userQuery)=>{
-        setLoading(true)
+
+        setLoading(true) 
         next7Days()
 
-        //Convert CityName to Latitude and Longitude
+    //Convert CityName to Latitude and Longitude used in the next API call
         const url = `http://api.openweathermap.org/geo/1.0/direct?q=${userQuery}&appid=${apiKey}`;
         try {
         const res = await axios.get(url)
         let lat = res.data[0].lat;
         let lon = res.data[0].lon
         
-        // Get weather details
+    // Get weather details
         const url2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}`;
         const res2 = await axios.get(url2)
+
         setCurrentCondition({
             city:userQuery, 
             checkedOn: apiDate(res2.data.current.dt), 
@@ -172,11 +188,8 @@ export const WeatherProvider = (props) => {
         }else{
             setSearched([{id: `${userQuery.substring(0,3)}${searched.length + 1}`, cityName:userQuery.charAt(0).toUpperCase() + userQuery.toLowerCase().slice(1), checkedOn: getTime()},...searched])
         }
-
-        
-
+    // Actions taken when there is an error during the API call
         } catch (error) {
-            console.log('Error message: ', error.message);
             setTriggerError(true)
             if (error.message === "Network Error"){
                 setErrMsg("Unable to connect. Please check your internet connection")

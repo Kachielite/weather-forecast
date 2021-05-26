@@ -24,9 +24,9 @@ const Chart = () => {
 
   const classes = useStyles();
 
+  /* Consuming context data */
   const {dailyConditions, weekdays} = useContext(WeatherContext)
   const {tempMin,tempMax,windSpeed,humidity} = dailyConditions
-
 
 
   const dataBar = {
@@ -48,7 +48,7 @@ const Chart = () => {
       data: humidity
     },
     {
-        label: 'Wind Speed(KM/h)',
+        label: 'Wind Speed(Km/h)',
         backgroundColor:['#7395AE'],
         data: windSpeed
     }],

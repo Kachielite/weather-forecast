@@ -37,13 +37,14 @@ const useStyles = makeStyles({
 
 export default function CustomizedTables() {
   const classes = useStyles();
+
+  /* Consuming context data */
   const {dailyConditions, weekdays} = useContext(WeatherContext)
   const {weatherIcon,tempMin,tempMax,windSpeed,humidity} = dailyConditions
 
   
 
   function createData(name, Day1,Day2,Day3,Day4,Day5,Day6,Day7) {
-    
     return { name ,Day1,Day2,Day3,Day4,Day5,Day6,Day7};
   }
 
@@ -57,7 +58,7 @@ export default function CustomizedTables() {
     createData('Condition',weather(weatherIcon[0]),weather(weatherIcon[1]),weather(weatherIcon[2]),weather(weatherIcon[3]),weather(weatherIcon[4]),weather(weatherIcon[5]),weather(weatherIcon[6])),
     createData('Min Temperature(°C)', tempMin[0], tempMin[1], tempMin[2], tempMin[3], tempMin[4],tempMin[5], tempMin[6]),
     createData('Max Temperature(°C)', tempMax[0], tempMax[1], tempMax[2], tempMax[3], tempMax[4],tempMax[5], tempMax[6]),
-    createData('Wind Speed(KM/h)',  windSpeed[0], windSpeed[1], windSpeed[2], windSpeed[3], windSpeed[4],windSpeed[5], windSpeed[6]),
+    createData('Wind Speed(Km/h)',  windSpeed[0], windSpeed[1], windSpeed[2], windSpeed[3], windSpeed[4],windSpeed[5], windSpeed[6]),
     createData('Humidity(%)', humidity[0], humidity[1], humidity[2], humidity[3], humidity[4],humidity[5], humidity[6]),
   ];
 

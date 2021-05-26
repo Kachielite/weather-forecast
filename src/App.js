@@ -17,8 +17,8 @@ function App() {
         <TitleBar/>
         <Error/>
         <Switch>
-          <Route exact path="/" component={HomePage}/>
-          <Route  path="/forecast/:cityName" component={ForecastPage}/>
+          <Route exact path={["/", "/forecast"]} component={HomePage}/>
+          <Route exact path="/forecast/:cityName" component={ForecastPage}/>
         </Switch>
       </div>
     </WeatherProvider>
